@@ -2,6 +2,12 @@
 
 Shining Star Project is a demonstration of celestial data visualization using Unity. It showcases the visualization of star data and constellations in a 3D environment optimized for the [Omicron-Unity CAVE2 Simulator](https://github.com/uic-evl/omicron-unity), providing an immersive experience for users.
 
+webpage containing all the info：https://shanghaoli98.github.io/CS528-UnityShiningStar-Shanghao/
+
+### Video Demo
+
+<video src="C:\Users\uicel\test_shanghao\Video\2024-02-11 16-26-05.mkv"></video>
+
 ## Features
 
 - Visualization of star data imported from CSV files.
