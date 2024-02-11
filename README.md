@@ -6,13 +6,8 @@ webpage containing all the info：https://shanghaoli98.github.io/CS528-UnityShin
 
 ### Video Demo
 
-<iframe  
-height=400 
-width=60% 
-src="https://youtu.be/ymvdlU5TrgE?feature=shared"  
-frameborder=0  
-allowfullscreen>
-</iframe>
+<iframe width="510" height="498" src="https://www.youtube.com/embed/ymvdlU5TrgE?si=eaxF1T90VC_CnEgU&amp;start=3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 
 
