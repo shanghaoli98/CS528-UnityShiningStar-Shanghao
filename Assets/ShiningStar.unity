@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7de39e81c0c6124984ed85df71bdb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csvFilePath: C:\Users\uicel\OneDrive\Documents\Shanghao\stardata_clean_final.csv
+  csvFilePath: Assets/StarResources/stardata_clean_final.csv
   timeText: {fileID: 0}
   constellationInfoPanel: {fileID: 0}
   lineMaterial: {fileID: 0}
