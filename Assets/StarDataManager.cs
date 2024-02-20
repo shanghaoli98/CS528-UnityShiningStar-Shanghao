@@ -37,7 +37,8 @@ public class StarDataManager : MonoBehaviour
     // List to store StarData objects
     public List<StarData> starDataList = new List<StarData>();
     // Path to the CSV file containing star data
-    public string csvFilePath = "C:\\Users\\uicel\\OneDrive\\Documents\\Shanghao\\stardata_clean_final.csv";
+    // public string csvFilePath = "C:\\Users\\uicel\\OneDrive\\Documents\\Shanghao\\stardata_clean_final.csv";
+    public string csvFilePath = "Assets/StarResources/stardata_clean_final.csv";
     // Define scale for cubes
     private const float scale = 0.3f;
 
@@ -69,53 +70,54 @@ public class StarDataManager : MonoBehaviour
         // Read data from CSV file and populate starDataList
         ReadStarDataFromCSV(csvFilePath);
         // Read constellationship.fab and parse star pairs
-        string constellationFilePath = "C:\\Users\\uicel\\OneDrive\\Documents\\Shanghao\\constellationship.fab";
+        // string constellationFilePath = "C:\\Users\\uicel\\OneDrive\\Documents\\Shanghao\\constellationship.fab";
+        string constellationFilePath = "Assets/StarResources/constellationship.fab";
         ReadConstellationData(constellationFilePath);
         // Display constellations
         DisplayConstellations();
     }
 
-    void Update()
-    {
-        // Update the positions of the stars based on their velocities
-        float timeScaleFactor = 1000f; // 1000 years per second
-        float deltaTime = Time.deltaTime;
-        foreach (StarData starData in starDataList)
-        {
-            float vx = starData.VX * timeScaleFactor;
-            float vy = starData.VY * timeScaleFactor;
-            float vz = starData.VZ * timeScaleFactor;
-            starData.X0 += vx * deltaTime;
-            starData.Y0 += vy * deltaTime;
-            starData.Z0 += vz * deltaTime;
-        }
-        // Update the visual representation of stars accordingly
-        UpdateStarPositions();
+    // void Update()
+    // {
+    //     // Update the positions of the stars based on their velocities
+    //     float timeScaleFactor = 1000f; // 1000 years per second
+    //     float deltaTime = Time.deltaTime;
+    //     foreach (StarData starData in starDataList)
+    //     {
+    //         float vx = starData.VX * timeScaleFactor;
+    //         float vy = starData.VY * timeScaleFactor;
+    //         float vz = starData.VZ * timeScaleFactor;
+    //         starData.X0 += vx * deltaTime;
+    //         starData.Y0 += vy * deltaTime;
+    //         starData.Z0 += vz * deltaTime;
+    //     }
+    //     // Update the visual representation of stars accordingly
+    //     UpdateStarPositions();
 
-        // Update elapsed time display
-        elapsedTime += Time.deltaTime;
-        UpdateTimeDisplay(elapsedTime);
-    }
+    //     // Update elapsed time display
+    //     elapsedTime += Time.deltaTime;
+    //     UpdateTimeDisplay(elapsedTime);
+    // }
 
-    // Update the positions of the visual representations of stars in the scene
-    void UpdateStarPositions()
-    {
-        // Update the positions of the visual representations of stars based on the updated positions of the stars in starDataList
-    }
+    // // Update the positions of the visual representations of stars in the scene
+    // void UpdateStarPositions()
+    // {
+    //     // Update the positions of the visual representations of stars based on the updated positions of the stars in starDataList
+    // }
 
-    // Update the elapsed time display
-    void UpdateTimeDisplay(float elapsedSeconds)
-    {
-        // Debug log to check if timeText is null
-        if (timeText == null)
-        {
-            Debug.LogError("timeText is not assigned!");
-            return;
-        }
-        int years = (int)(elapsedSeconds / 31536000); // 1 year = 31,536,000 seconds
-        int days = (int)((elapsedSeconds % 31536000) / 86400); // 1 day = 86,400 seconds
-        timeText.text = "Elapsed Time: " + years + " years, " + days + " days";
-    }
+    // // Update the elapsed time display
+    // void UpdateTimeDisplay(float elapsedSeconds)
+    // {
+    //     // Debug log to check if timeText is null
+    //     if (timeText == null)
+    //     {
+    //         Debug.LogError("timeText is not assigned!");
+    //         return;
+    //     }
+    //     int years = (int)(elapsedSeconds / 31536000); // 1 year = 31,536,000 seconds
+    //     int days = (int)((elapsedSeconds % 31536000) / 86400); // 1 day = 86,400 seconds
+    //     timeText.text = "Elapsed Time: " + years + " years, " + days + " days";
+    // }
 
     // Display constellations
     private void DisplayConstellations()

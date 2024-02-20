@@ -30,9 +30,9 @@ To run the Phase 1 Unity Project locally, follow these steps:
 
 2. Open the project in Unity.
 
-3. Ensure that you have the necessary assets and dependencies configured.
+3. Open the scene named `ShiningStar.unity (Assets/ShiningStar.unity)`.
 
-4. Run the project in the Unity Editor or build it for your desired platform.
+4. Click the play button on the top to run the project. 
 
 ## Usage
 

@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/module-omicron/CAVE2/Scenes/Cube World Example.unity
+- path: Assets/ShiningStar.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
