@@ -124,7 +124,7 @@ public class OMenu : MonoBehaviour {
 
     void OnInput()
     {
-        if (CAVE2.Input.GetButtonDown(menuManager.menuWandID, CAVE2.Button.ButtonDown))
+        if (CAVE2.Input.GetButtonDown(menuManager.menuWandID, CAVE2.Button.ButtonDown) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (currentItem < menuItems.Length - 1 && menuItems[currentItem + 1].IsActive())
             {
@@ -187,10 +187,12 @@ public class OMenu : MonoBehaviour {
 
         if (CAVE2.Input.GetButtonDown(menuManager.menuWandID, menuManager.selectButton))
         {
+            Debug.Log("mouse 1");
             CAVE2.SendMessage(gameObject.name, "MenuSelectItem");
         }
         if (CAVE2.Input.GetButtonDown(menuManager.menuWandID, menuManager.menuBackButton))
         {
+            Debug.Log("mouse 0");
             ToggleMenu();
         }
 
@@ -330,6 +332,7 @@ public class OMenu : MonoBehaviour {
 
     public void MenuSelectItem()
     {
+        Debug.Log(currentItem);
         if (menuItems[currentItem].GetType() == typeof(Button))
         {
             ((Button)menuItems[currentItem]).OnPointerClick(pointerData);
