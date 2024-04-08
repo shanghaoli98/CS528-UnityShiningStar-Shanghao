@@ -1,6 +1,6 @@
 ## Description
 
-<img src="C:\Users\uicel\OneDrive\Documents\WeChat Files\wxid_1g2yn2r1f7cp12\FileStorage\Temp\ba74bb3a12f7afcdcc2f9743801d728.png" alt="ba74bb3a12f7afcdcc2f9743801d728" style="zoom:50%;" />
+<img src=".\Webpage\Weixin Image_20240407201903.png" alt="Weixin Image_20240407201903" style="zoom:50%;" />
 
 Shining Star Project is a demonstration of celestial data visualization using Unity. It showcases the visualization of star data and constellations in a 3D environment optimized for the [Omicron-Unity CAVE2 Simulator](https://github.com/uic-evl/omicron-unity), providing an immersive experience for users.
 
@@ -59,10 +59,10 @@ To run the Phase 1 Unity Project locally, follow these steps:
 
   - right click to select an option in the menu
 
-    <img src="C:\Users\uicel\OneDrive\Documents\WeChat Files\wxid_1g2yn2r1f7cp12\FileStorage\Temp\48f5c1bdef6207d8476d1d513ca5470.png" alt="48f5c1bdef6207d8476d1d513ca5470" style="zoom: 67%;" /><img src="C:\Users\uicel\OneDrive\Documents\WeChat Files\wxid_1g2yn2r1f7cp12\FileStorage\Temp\165dcb62c8887ffe913bda0d32592d7.png" alt="165dcb62c8887ffe913bda0d32592d7" style="zoom: 67%;" /><img src="C:\Users\uicel\OneDrive\Documents\WeChat Files\wxid_1g2yn2r1f7cp12\FileStorage\Temp\cc887a1e25601e814282d0588f5935a.png" alt="cc887a1e25601e814282d0588f5935a" style="zoom: 67%;" />
+    <img src=".\Webpage\Weixin Image_20240407201953.png" alt="Weixin Image_20240407201953" style="zoom: 67%;" /><img src=".\Webpage\Weixin Image_20240407201957.png" alt="Weixin Image_20240407201957" style="zoom:67%;" /><img src=".\Webpage\Weixin Image_20240407202001.png" alt="Weixin Image_20240407202001" style="zoom:67%;" />
 
 
-Note: There are three-level menus; the third menu contains the interactions. In the tiered menu, you can use the ↑ and ↓ keys to toggle and right-click different options. By default, the application will display five constellations. Once you select any constellation from the menu, only the selected constellation will display. You can also click the right circle to display information about *Reticulum*.
+Note: There are three-level menus; the third menu contains the interactions. In the tiered menu, you can use the ↑ and ↓ keys to toggle and right-click different options. By default, the application will display five constellations. Once you select any constellation from the menu, only the selected constellation will be displayed. You can also click the circle next to Reticulum to display the information about *Reticulum*.
 
 You can click **Time Pause** and **Time Start** to pause and start the evolution of the constellations, click **Reset** to reset the location, orientation, and time back to the starting point, click **StarLarge** and **StarSmall** to increase or decrease the distances between the stars, and click **Exoplanet Color Schema** to change the color scheme from stellar type to the number of known planets in the system.
 
