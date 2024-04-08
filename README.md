@@ -59,7 +59,7 @@ To run the Phase 1 Unity Project locally, follow these steps:
 
   - right click to select an option in the menu
 
-    <img src=".\Webpage\Weixin Image_20240407201953.png" alt="Weixin Image_20240407201953" style="zoom: 67%;" /><img src=".\Webpage\Weixin Image_20240407201957.png" alt="Weixin Image_20240407201957" style="zoom:67%;" /><img src=".\Webpage\Weixin Image_20240407202001.png" alt="Weixin Image_20240407202001" style="zoom:67%;" />
+    <img src=".\Webpage\Weixin Image_20240407201953.png" alt="Weixin Image_20240407201953" style="zoom: 50%;" /><img src=".\Webpage\Weixin Image_20240407201957.png" alt="Weixin Image_20240407201957" style="zoom: 50%;" /><img src=".\Webpage\Weixin Image_20240407202001.png" alt="Weixin Image_20240407202001" style="zoom: 50%;" />
 
 
 Note: There are three-level menus; the third menu contains the interactions. In the tiered menu, you can use the ↑ and ↓ keys to toggle and right-click different options. By default, the application will display five constellations. Once you select any constellation from the menu, only the selected constellation will be displayed. You can also click the circle next to Reticulum to display the information about *Reticulum*.
