@@ -15,6 +15,12 @@ public class StarDataManager : MonoBehaviour
     public List<Material> newMat = new List<Material>();
 
     bool isChangeColor = false;
+
+    public Text yearText;
+    float year = 0;
+
+    public Material sky1;
+    public Material sky2;
     // Define a class to hold star data
     public class StarData
     {
@@ -109,7 +115,7 @@ public class StarDataManager : MonoBehaviour
         DisplayConstellations();
 
         // Start the time progression coroutine
-        StartCoroutine(TimeProgression());
+        //StartCoroutine(TimeProgression());
     }
 
     private void Update()
@@ -131,7 +137,7 @@ public class StarDataManager : MonoBehaviour
             else
             {
                 // Update star positions based on velocities
-                UpdateStarPositions();
+                UpdateStarPositions(1);
 
                 // Redraw constellations
                 DisplayConstellations();
@@ -144,7 +150,7 @@ public class StarDataManager : MonoBehaviour
     }
 
     // Update star positions based on velocities
-    private void UpdateStarPositions()
+    private void UpdateStarPositions(int dir)
     {
         // Define time scale factor (e.g., 1,000 years per second)
         float timeScaleFactor = 1000f;
@@ -155,11 +161,14 @@ public class StarDataManager : MonoBehaviour
             Vector3 currentPosition = new Vector3(starData.X0, starData.Y0, starData.Z0);
 
             // Calculate position changes based on velocity and time scale factor
-            float deltaTimeYears = Time.deltaTime * timeScaleFactor;
+            float deltaTimeYears =dir * Time.deltaTime * timeScaleFactor;
+            Debug.Log(deltaTimeYears);
             starData.X0 += starData.VX * deltaTimeYears;
             starData.Y0 += starData.VY * deltaTimeYears;
             starData.Z0 += starData.VZ * deltaTimeYears;
 
+            
+            
             // Store updated position for debugging
             Vector3 updatedPosition = new Vector3(starData.X0, starData.Y0, starData.Z0);
 
@@ -176,6 +185,11 @@ public class StarDataManager : MonoBehaviour
                 starPositions.Add(starData.HIP, updatedPosition);
             }
         }
+
+        float TimeYears = dir * timeScaleFactor;
+        year += TimeYears * 1.02269f;
+        yearText.text = "Game Time:" +year.ToString() + "years"; 
+
     }
 
 
@@ -551,12 +565,12 @@ public class StarDataManager : MonoBehaviour
         if(!isChangeColor)
         {
             isChangeColor = true;
-           
 
+            RenderSettings.skybox = sky2;
             //foreach (var s in starDataList)
             //{
-                
-              
+
+
 
 
             //    //Debug.Log(s.HIP);
@@ -582,11 +596,13 @@ public class StarDataManager : MonoBehaviour
         else
         {
             isChangeColor = false;
-           
+
+
+            RenderSettings.skybox = sky1;
 
             //foreach (var s in starDataList)
             //{
-                
+
             //    //Debug.Log(s.HIP);
             //    int i = Random.Range(0, newMat.Count);
             //    GameObject.Find(s.HIP).GetComponent<MeshRenderer>().material = newMat[i];
@@ -606,6 +622,19 @@ public class StarDataManager : MonoBehaviour
             }
         }
 
+    }
+
+
+    public void UpdateStarsForward()
+    {
+        UpdateStarPositions(1);
+        DisplayConstellations();
+    }
+
+    public void UpdateStarsBack()
+    {
+        UpdateStarPositions(-1);
+        DisplayConstellations();
     }
 }
 
