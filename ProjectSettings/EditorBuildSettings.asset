@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ShiningStar.unity
+    guid: 521e8edcb027b7540ba21cdde2043482
   m_configObjects: {}

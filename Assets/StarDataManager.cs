@@ -68,8 +68,12 @@ public class StarDataManager : MonoBehaviour
     public List<StarData> starDataList = new List<StarData>();
     public List<StarData2> starDataList2 = new List<StarData2>();
     // Path to the CSV file containing star data
-    public string csvFilePath = "Assets/StarResources/stardata_clean_final.csv";
-    public string csvFilePath2 = "Assets/StarResources/exoplanet_data.csv";
+    //public string csvFilePath = "Assets/StarResources/stardata_clean_final.csv";
+    //string csvFilePath = Application.dataPath + "/StarResources/stardata_clean_final.csv";
+    string csvFilePath = Application.streamingAssetsPath + "/stardata_clean_final.csv";
+    //public string csvFilePath2 = "Assets/StarResources/exoplanet_data.csv";
+    //string csvFilePath2 = Application.dataPath + "/StarResources/exoplanet_data.csv";
+    string csvFilePath2 = Application.streamingAssetsPath + "/exoplanet_data.csv";
 
     // Dictionary to store star positions by Hipparcos number
     private Dictionary<string, Vector3> starPositions = new Dictionary<string, Vector3>();
@@ -108,7 +112,10 @@ public class StarDataManager : MonoBehaviour
         ReadStarDataFromCSV(csvFilePath);
         ReadStarDataFromCSV2(csvFilePath2);
         // Read constellationship.fab and parse star pairs
-        string constellationFilePath = "Assets/StarResources/constellationship.fab";
+        //string constellationFilePath = "Assets/StarResources/constellationship.fab";
+        string constellationFilePath = Application.streamingAssetsPath + "/constellationship.fab";
+        Debug.Log(constellationFilePath);
+
         ReadConstellationData(constellationFilePath);
 
         // Display constellations
