@@ -187,12 +187,12 @@ public class OMenu : MonoBehaviour {
 
         if (CAVE2.Input.GetButtonDown(menuManager.menuWandID, menuManager.selectButton))
         {
-            Debug.Log("mouse 1");
+            //Debug.Log("mouse 1");
             CAVE2.SendMessage(gameObject.name, "MenuSelectItem");
         }
         if (CAVE2.Input.GetButtonDown(menuManager.menuWandID, menuManager.menuBackButton))
         {
-            Debug.Log("mouse 0");
+            //Debug.Log("mouse 0");
             ToggleMenu();
         }
 

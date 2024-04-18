@@ -8,7 +8,7 @@ public class StarDataManager : MonoBehaviour
 {
 
      public GameObject[] stars;
-     GameObject[] cur_StarsPairs = new GameObject[5];
+     public GameObject[] cur_StarsPairs = new GameObject[25];
      public string[] starPairsDisplay;
 
     public GameObject info;
@@ -17,7 +17,8 @@ public class StarDataManager : MonoBehaviour
     bool isChangeColor = false;
 
     public Text yearText;
-    float year = 0;
+    public float year = 0;
+
 
     public Material sky1;
     public Material sky2;
@@ -88,6 +89,9 @@ public class StarDataManager : MonoBehaviour
     // Line material for constellation lines
     public Material lineMaterial;
 
+
+
+
     // Scale for star objects
     private const float scale = 0.3f;
 
@@ -102,6 +106,15 @@ public class StarDataManager : MonoBehaviour
     float starScale = 1;
 
     bool isPauseTime = false;
+
+    bool isLarge = false;
+
+
+    bool star1 = true;
+    bool star2 = true;
+    bool star3 = true;
+    bool star4 = true;
+    bool star5 = true;
     void Start()
     {
         // Initialize the line material
@@ -117,6 +130,11 @@ public class StarDataManager : MonoBehaviour
         Debug.Log(constellationFilePath);
 
         ReadConstellationData(constellationFilePath);
+
+
+        ReadStarDataFromCSV3(csvFilePath);
+
+
 
         // Display constellations
         DisplayConstellations();
@@ -135,8 +153,7 @@ public class StarDataManager : MonoBehaviour
     // Coroutine for time progression
     IEnumerator TimeProgression()
     {
-        while (true)
-        {
+      
             if(isPauseTime)
             {
 
@@ -153,7 +170,7 @@ public class StarDataManager : MonoBehaviour
             yield return new WaitForSeconds(positionUpdateInterval);
 
          
-        }
+        
     }
 
     // Update star positions based on velocities
@@ -169,7 +186,7 @@ public class StarDataManager : MonoBehaviour
 
             // Calculate position changes based on velocity and time scale factor
             float deltaTimeYears =dir * Time.deltaTime * timeScaleFactor;
-            Debug.Log(deltaTimeYears);
+            //Debug.Log(deltaTimeYears);
             starData.X0 += starData.VX * deltaTimeYears;
             starData.Y0 += starData.VY * deltaTimeYears;
             starData.Z0 += starData.VZ * deltaTimeYears;
@@ -180,7 +197,7 @@ public class StarDataManager : MonoBehaviour
             Vector3 updatedPosition = new Vector3(starData.X0, starData.Y0, starData.Z0);
 
             // Log position changes for debugging
-            Debug.Log($"Star {starData.HIP} moved from {currentPosition} to {updatedPosition}");
+            //Debug.Log($"Star {starData.HIP} moved from {currentPosition} to {updatedPosition}");
 
             // Update starPositions dictionary
             if (starPositions.ContainsKey(starData.HIP))
@@ -193,9 +210,17 @@ public class StarDataManager : MonoBehaviour
             }
         }
 
-        float TimeYears = dir * timeScaleFactor;
-        year += TimeYears * 1.02269f;
-        yearText.text = "Game Time:" +year.ToString() + "years"; 
+        if(isLarge)
+        {
+            isLarge = false;
+        }
+        else
+        {
+            float TimeYears = dir * timeScaleFactor;
+            year += TimeYears * 1.02269f;
+            yearText.text = year.ToString() + "years";
+        }
+       
 
     }
 
@@ -222,6 +247,7 @@ public class StarDataManager : MonoBehaviour
 
                     // Create a new empty GameObject to hold the constellation lines
                     GameObject constellationObj = new GameObject(constellationName);
+                    
                     cur_StarsPairs[j] = constellationObj;
                     // Iterate through star pairs and draw lines between them
                     for (int i = 0; i < starPairs.Count; i += 2)
@@ -230,6 +256,7 @@ public class StarDataManager : MonoBehaviour
                         string star1 = starPairs[i];
                         string star2 = starPairs[i + 1];
 
+                        //Debug.Log(starPairs[i]);
                         // Check if both stars exist in the dictionary
                         if (starPositions.ContainsKey(star1) && starPositions.ContainsKey(star2))
                         {
@@ -304,7 +331,144 @@ public class StarDataManager : MonoBehaviour
 
         // Read all lines from the CSV file
         string[] lines = File.ReadAllLines(filePath);
+        Debug.Log("star count :" + lines.Length);
+        // Skip the first line (header) and start parsing from the second line
+        for (int i = 1; i < lines.Length; i+= 8)
+        {
+            string[] values = lines[i].Split(',');
 
+            // Check if the line has the correct number of values
+            if (values.Length == 11)
+            {
+                // Declare variables to hold parsed float values
+                float dist, x0, y0, z0, absMag, mag, vx, vy, vz;
+
+                // Check if the values are not empty before parsing
+                if (!string.IsNullOrEmpty(values[1]) &&
+                    !string.IsNullOrEmpty(values[2]) &&
+                    !string.IsNullOrEmpty(values[3]) &&
+                    !string.IsNullOrEmpty(values[4]) &&
+                    !string.IsNullOrEmpty(values[5]) &&
+                    !string.IsNullOrEmpty(values[6]) &&
+                    !string.IsNullOrEmpty(values[7]) &&
+                    !string.IsNullOrEmpty(values[8]) &&
+                    !string.IsNullOrEmpty(values[9]))
+                {
+                    // Try to parse float values from the string array
+                    if (float.TryParse(values[1], out dist) &&
+                        float.TryParse(values[2], out x0) &&
+                        float.TryParse(values[3], out y0) &&
+                        float.TryParse(values[4], out z0) &&
+                        float.TryParse(values[5], out absMag) &&
+                        float.TryParse(values[6], out mag) &&
+                        float.TryParse(values[7], out vx) &&
+                        float.TryParse(values[8], out vy) &&
+                        float.TryParse(values[9], out vz))
+                    {
+                        // Create a new StarData object and add it to the list
+                        StarData starData = new StarData(
+                            values[0],   // HIP
+                            dist,        // DIST
+                            x0,          // X0
+                            y0,          // Y0
+                            z0,          // Z0
+                            absMag,      // ABSMAG
+                            mag,         // MAG
+                            vx,          // VX
+                            vy,          // VY
+                            vz,          // VZ
+                            values[10]   // SPECT
+                        );
+
+                        // Add the StarData object to the list
+                        starDataList.Add(starData);
+
+                        // Store star positions by Hipparcos number
+                        starPositions[values[0]] = new Vector3(x0, y0, z0);
+
+
+                        foreach (var pair in constellationStarPairs)
+                        {
+                            string constellationName = pair.Key;
+
+                            for (int j = 0; j < starPairsDisplay.Length; j++)
+                            {
+                                if (starPairsDisplay[j] == constellationName)
+                                {
+
+                                    //Debug.Log(constellationName);
+
+                                    List<string> starPairs = pair.Value;
+
+                                    // Create a new empty GameObject to hold the constellation lines
+                                    GameObject constellationObj = new GameObject(constellationName);
+                                    cur_StarsPairs[j] = constellationObj;
+                                    // Iterate through star pairs and draw lines between them
+                                    for (int m = 0; m< starPairs.Count; m += 2)
+                                    {
+
+                                        
+
+                                        Debug.Log(starPairs[m]);
+                                        if(starPairs[m] == values[0])
+                                        {
+                                            // Instantiate star objects at their positions
+                                            //GameObject starObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                                            int index = Random.Range(0, stars.Length);
+                                            GameObject starObject = Instantiate(stars[index]);
+                                            starObject.name = values[0].ToString();
+                                            starObject.transform.position = new Vector3(x0, y0, z0) * starScale;
+                                            starObject.transform.localScale = Vector3.one * scale;
+
+                                        }
+
+                                    }
+                                }
+                            }
+
+
+
+                        }
+
+
+
+
+
+                      
+                    }
+                    else
+                    {
+                        // Log an error if parsing fails for any value
+                        Debug.LogError("Failed to parse values from line " + i + ": " + lines[i]);
+                    }
+                }
+                else
+                {
+                    // Log an error if any value is empty
+                    Debug.LogError("Empty value found in line " + i + ": " + lines[i]);
+                }
+            }
+            else
+            {
+                // Log an error if the line does not have the correct number of values
+                Debug.LogError("Invalid number of values in line " + i + ": " + lines[i]);
+            }
+        }
+    }
+
+
+    private void ReadStarDataFromCSV3(string filePath)
+    {
+        // Check if the file exists
+        if (!File.Exists(filePath))
+        {
+            Debug.LogError("File not found: " + filePath);
+            return;
+        }
+
+        // Read all lines from the CSV file
+        string[] lines = File.ReadAllLines(filePath);
+        Debug.Log("star count :" + lines.Length);
         // Skip the first line (header) and start parsing from the second line
         for (int i = 1; i < lines.Length; i++)
         {
@@ -359,9 +523,10 @@ public class StarDataManager : MonoBehaviour
                         // Store star positions by Hipparcos number
                         starPositions[values[0]] = new Vector3(x0, y0, z0);
 
+
                         // Instantiate star objects at their positions
                         //GameObject starObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                        int index = Random.Range(0,stars.Length);
+                        int index = Random.Range(0, stars.Length);
                         GameObject starObject = Instantiate(stars[index]);
                         starObject.name = values[0].ToString();
                         starObject.transform.position = new Vector3(x0, y0, z0) * starScale;
@@ -386,7 +551,6 @@ public class StarDataManager : MonoBehaviour
             }
         }
     }
-
     // Method to display information about the selected constellation
     public void ShowConstellationInfo(string constellationName)
     {
@@ -402,62 +566,79 @@ public class StarDataManager : MonoBehaviour
 
     public void StarPairsDisplayBtn1()
     {
+        HideStarPairs();
           Debug.Log("111111");
-        if(cur_StarsPairs[0].activeSelf)
+        if(star1)
         {
+            star1 = false;
             cur_StarsPairs[0].SetActive(false);
         }
         else
         {
+            star1 = true;
             cur_StarsPairs[0].SetActive(true);
         }
     }
 
      public void StarPairsDisplayBtn2()
     {
-          Debug.Log("22222");
-        if (cur_StarsPairs[1].activeSelf)
+        HideStarPairs();
+        Debug.Log("22222");
+        if (star2)
         {
+            star2 = false;
             cur_StarsPairs[1].SetActive(false);
         }
         else
         {
+            star2 = true;
             cur_StarsPairs[1].SetActive(true);
         }
     }
      public void StarPairsDisplayBtn3()
     {
-          Debug.Log("33333");
-        if (cur_StarsPairs[2].activeSelf)
+        HideStarPairs();
+        Debug.Log("33333");
+        if (star3)
         {
+            star3 = false;
+            Debug.Log("33333--1");
             cur_StarsPairs[2].SetActive(false);
         }
         else
         {
+            star3 = true;
+            Debug.Log("33333--2");
             cur_StarsPairs[2].SetActive(true);
         }
     }
      public void StarPairsDisplayBtn4()
     {
-          Debug.Log("44444");
-        if (cur_StarsPairs[3].activeSelf)
+        HideStarPairs();
+        Debug.Log("44444");
+        if (star4)
         {
+            star4 = false;
             cur_StarsPairs[3].SetActive(false);
         }
         else
         {
+            star4 = true;
             cur_StarsPairs[3].SetActive(true);
         }
     }
      public void StarPairsDisplayBtn5()
     {
-          Debug.Log("55555");
-        if (cur_StarsPairs[4].activeSelf)
+        HideStarPairs();
+        Debug.Log("55555");
+        if (star5)
         {
+            star5 = false;
             cur_StarsPairs[4].SetActive(false);
         }
         else
         {
+            star5 = true;
             cur_StarsPairs[4].SetActive(true);
         }
     }
@@ -472,6 +653,8 @@ public class StarDataManager : MonoBehaviour
         else
         {
             info.SetActive(true);
+            GameObject.Find("CAVE2-PlayerController").transform.position = new Vector3(6.6f, 7.7f, 15.5f);
+            GameObject.Find("CAVE2-PlayerController").transform.eulerAngles = new Vector3(0, 180, 0);
         }
     }
 
@@ -487,11 +670,15 @@ public class StarDataManager : MonoBehaviour
 
     public void SetStarScaleLarge()
     {
-        starScale += 0.3f; 
+        isLarge = true;
+        starScale += 10f;
+        StartCoroutine(TimeProgression());
     }
     public void SetStarScaleSmall()
     {
-        starScale -= 0.3f;
+        isLarge = true;
+        starScale -= 10f;
+        StartCoroutine(TimeProgression());
     }
 
 
@@ -534,7 +721,7 @@ public class StarDataManager : MonoBehaviour
                     string[] s = values[2].Split(' ');
                         StarData2 starData2 = new StarData2(values[0], s[1]);
 
-                        Debug.Log("pl" + values[0] + "..hip.." + s[1]);
+                       // Debug.Log("pl" + values[0] + "..hip.." + s[1]);
                         // Add the StarData object to the list
                         starDataList2.Add(starData2);
 
@@ -642,6 +829,24 @@ public class StarDataManager : MonoBehaviour
     {
         UpdateStarPositions(-1);
         DisplayConstellations();
+    }
+
+
+    public void ShowStarPairs()
+    {
+        foreach(var v in cur_StarsPairs)
+        {
+            v.SetActive(true);
+        }
+    }
+
+
+    public void HideStarPairs()
+    {
+        foreach (var v in cur_StarsPairs)
+        {
+            v.SetActive(false);
+        }
     }
 }
 

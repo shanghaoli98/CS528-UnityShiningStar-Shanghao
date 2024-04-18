@@ -53,7 +53,6 @@ ScriptsOnlyBuild:
     - WandUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -71,8 +70,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.ToggleGroup
-    com.unity.multiplayer-hlapi.Runtime.dll:
-    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/ShiningStar.unity:
     - Class: 1
@@ -946,7 +943,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 23b2cff10d4adbda17eb7256db6a3de9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ResetPos
@@ -1018,7 +1015,7 @@ ScriptsOnlyBuild:
     className: PrecisionTransformModifier
   - hash:
       serializedVersion: 2
-      Hash: 748ab3bb4aac9af9df126453cc6abbe9
+      Hash: caf70bdbc3a0424698c332c7ecc2d2d3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: StarDataManager
